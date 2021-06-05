@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './ContactFilter.module.css';
 import { connect } from 'react-redux';
 import { changeFilter, selectors } from '../../redux/contacts';
@@ -21,6 +22,11 @@ const ContactFilter = ({ value, handleChange }) => {
       </label>
     </div>
   );
+};
+
+ContactFilter.propTypes = {
+  value: PropTypes.string,
+  handleChange: PropTypes.func,
 };
 
 const mapStateToProps = state => {

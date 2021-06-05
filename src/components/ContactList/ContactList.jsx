@@ -1,9 +1,11 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
 import { connect } from 'react-redux';
 import ContactFilter from '../ContactFilter/ContactFilter';
 import Loader from '../Loader';
 import { operations, selectors } from '../../redux/contacts';
+import Button from '../Button/Button';
 
 const ContactList = ({ contacts, handleDelete, isLoadingContacts }) => (
   <div className={styles.section}>
@@ -14,16 +16,13 @@ const ContactList = ({ contacts, handleDelete, isLoadingContacts }) => (
         {contacts.map(contact => (
           <li key={contact.id} className={styles.item}>
             {contact.name}: {contact.number}
-            <button
+            <Button
               type="button"
-              onClick={() => handleDelete(contact.id)}
+              cbOnClick={handleDelete}
+              cbArgs={[contact.id]}
               className={styles.button}
-            >
-              Delete{' '}
-              <span role="img" aria-label="delete icon">
-                ❌
-              </span>
-            </button>
+              title="Delete &nbsp; ❌"
+            />
           </li>
         ))}
       </ul>
@@ -49,6 +48,7 @@ ContactList.propTypes = {
   ),
   handleChange: PropTypes.func,
   handleDelete: PropTypes.func,
+  isLoadingContacts: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({

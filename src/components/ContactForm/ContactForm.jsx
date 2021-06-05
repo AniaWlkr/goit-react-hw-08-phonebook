@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './ContactForm.module.css';
 import { operations } from '../../redux/contacts';
+import Button from '../Button/Button';
 
 class ContactForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func,
+    addContact: PropTypes.func,
   };
 
   state = {
@@ -62,12 +64,11 @@ class ContactForm extends Component {
               className={styles.input}
             />
           </label>
-          <button type="submit" className={styles.button}>
-            Add contact{' '}
-            <span role="img" aria-label="green check" className={styles.icon}>
-              ✅
-            </span>
-          </button>
+          <Button
+            type="submit"
+            title="Add contact &nbsp; ✅"
+            className={styles.button}
+          />
         </form>
       </div>
     );
