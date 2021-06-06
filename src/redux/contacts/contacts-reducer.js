@@ -16,7 +16,7 @@ const {
 } = actions;
 
 const items = createReducer([], {
-  [fetchContactsSuccess]: (state, { payload }) => payload,
+  [fetchContactsSuccess]: (_, { payload }) => payload,
   [addContactSuccess]: (state, { payload }) =>
     !state.find(contact => contact.number === payload.number)
       ? [...state, payload]

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './Contacts.module.css';
-import { operations } from '../../../contacts';
+import { operations } from '../../../redux/contacts';
 import ContactForm from '../../ContactForm';
 import ContactList from '../../ContactList';
 
