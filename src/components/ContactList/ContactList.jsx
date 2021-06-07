@@ -7,7 +7,12 @@ import Loader from '../Loader';
 import { operations, selectors } from '../../redux/contacts';
 import Button from '../Button/Button';
 
-const ContactList = ({ contacts, handleDelete, isLoadingContacts }) => (
+const ContactList = ({
+  contacts,
+  handleDelete,
+  // handleChange,
+  isLoadingContacts,
+}) => (
   <div className={styles.section}>
     <ContactFilter />
     {isLoadingContacts && <Loader />}
@@ -16,6 +21,13 @@ const ContactList = ({ contacts, handleDelete, isLoadingContacts }) => (
         {contacts.map(contact => (
           <li key={contact.id} className={styles.item}>
             {contact.name}: {contact.number}
+            {/* <Button
+              type="button"
+              cbOnClick={handleChange}
+              cbArgs={[contact.id]}
+              className={styles.button}
+              title="Change &nbsp; 📝"
+            /> */}
             <Button
               type="button"
               cbOnClick={handleDelete}
@@ -46,7 +58,7 @@ ContactList.propTypes = {
       number: PropTypes.string,
     }),
   ),
-  handleChange: PropTypes.func,
+  // handleChange: PropTypes.func,
   handleDelete: PropTypes.func,
   isLoadingContacts: PropTypes.bool,
 };
@@ -58,6 +70,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleDelete: contactId => dispatch(operations.deleteContact(contactId)),
+  // handleChange: contactId => dispatch(operations.changeContact(contactId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

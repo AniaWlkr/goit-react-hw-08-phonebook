@@ -1,26 +1,80 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component, lazy, Suspense } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import routes from '../components/routes';
+import { operations, selectors } from '../redux/auth';
 import Container from '../components/Container';
 import AppBar from '../components/AppBar';
-import HomePage from '../components/Pages/HomePage';
-import RegisterPage from '../components/Pages/RegisterPage';
-import LoginPage from '../components/Pages/LoginPage';
-import ContactsPage from '../components/Pages/ContactsPage';
-import routes from '../components/routes';
+import Loader from '../components/Loader';
 
-const App = () => {
-  return (
-    <Container>
-      <AppBar />
+const HomePage = lazy(() => import('../components/Pages/HomePage'));
+const RegisterPage = lazy(() => import('../components/Pages/RegisterPage'));
+const LoginPage = lazy(() => import('../components/Pages/LoginPage'));
+const ContactsPage = lazy(() => import('../components/Pages/ContactsPage'));
 
-      <Switch>
-        <Route exact path={routes.home} component={HomePage} />
-        <Route path={routes.register} component={RegisterPage} />
-        <Route path={routes.login} component={LoginPage} />
-        <Route path={routes.contacts} component={ContactsPage} />
-      </Switch>
-    </Container>
-  );
+class App extends Component {
+  componentDidMount() {
+    this.props.getCurrentUser();
+  }
+
+  render() {
+    const { isAuthorized } = this.props;
+
+    return (
+      <Container>
+        <AppBar />
+        <Suspense fallback={Loader}>
+          <Switch>
+            <Route exact path={routes.home} component={HomePage} />
+            <Route
+              path={routes.register}
+              render={props =>
+                !isAuthorized ? (
+                  <RegisterPage {...props} />
+                ) : (
+                  <Redirect to={routes.contacts} />
+                )
+              }
+            />
+            <Route
+              path={routes.login}
+              render={props =>
+                !isAuthorized ? (
+                  <LoginPage {...props} />
+                ) : (
+                  <Redirect to={routes.contacts} />
+                )
+              }
+            />
+            <Route
+              path={routes.contacts}
+              render={props =>
+                isAuthorized ? (
+                  <ContactsPage {...props} />
+                ) : (
+                  <Redirect to={routes.login} />
+                )
+              }
+            />
+          </Switch>
+        </Suspense>
+      </Container>
+    );
+  }
+}
+
+App.propTypes = {
+  getCurrentUser: PropTypes.func,
+  isAuthorized: PropTypes.bool,
 };
 
-export default App;
+const mapDispatchToProps = {
+  getCurrentUser: operations.getCurrentUser,
+};
+
+const mapStateToProps = state => ({
+  isAuthorized: selectors.getIsAuthorized(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

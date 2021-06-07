@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { operations } from '../../../redux/auth';
+import Button from '../../Button';
 
 class LoginPage extends Component {
   state = {
@@ -13,7 +17,7 @@ class LoginPage extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    // this.props.userLogin(this.state);
+    this.props.loginUser(this.state);
 
     this.setState({
       email: '',
@@ -44,9 +48,18 @@ class LoginPage extends Component {
             onChange={this.handleChange}
           />
         </label>
+        <Button type="submit" title="Login" />
       </form>
     );
   }
 }
 
-export default LoginPage;
+LoginPage.propTypes = {
+  loginUser: PropTypes.func,
+};
+
+const mapDispatchToProps = dispatch => ({
+  loginUser: userCredentials => dispatch(operations.loginUser(userCredentials)),
+});
+
+export default connect(null, mapDispatchToProps)(LoginPage);

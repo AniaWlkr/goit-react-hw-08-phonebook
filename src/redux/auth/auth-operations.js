@@ -35,7 +35,7 @@ const loginUser = userCredentials => async dispatch => {
     token.set(response.data.token);
     dispatch(actions.loginSuccess(response.data));
   } catch (error) {
-    dispatch(actions.logoutError(error.message));
+    dispatch(actions.loginError(error.message));
   }
 };
 
@@ -55,9 +55,11 @@ const getCurrentUser = () => (dispatch, getState) => {
   const {
     auth: { token: persistedToken },
   } = getState();
+
   if (!persistedToken) {
     return;
   }
+
   token.set(persistedToken);
 
   dispatch(actions.getCurrentUserRequest());
