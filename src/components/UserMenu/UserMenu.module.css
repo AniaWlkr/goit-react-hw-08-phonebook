@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.greeting {
+  margin-right: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  color: darkviolet;
+}
+
+.button {
+  width: 100px;
+  height: 30px;
+
+  font-size: 18px;
+
+  background: #fff;
+  cursor: pointer;
+}
+
+.button {
+  border-style: none;
+  border: 1px solid rgb(189, 188, 188);
+  border-radius: 3px;
+  box-shadow: 4px 4px 5px 1px rgba(172, 171, 171, 0.7);
+}
+
+.button:hover,
+.button:focus {
+  background: lightblue;
+}

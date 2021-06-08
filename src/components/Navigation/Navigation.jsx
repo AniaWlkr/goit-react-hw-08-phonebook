@@ -2,7 +2,9 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styles from '../AppBar/AppBar.module.css';
+import commonStyles from '../commonStyles/linkComStyles.module.css';
+import styles from './Navigation.module.css';
+import classnames from 'classnames';
 import routes from '../routes';
 import { selectors } from '../../redux/auth';
 
@@ -12,8 +14,8 @@ const Navigation = ({ isAuthorized }) => {
       <NavLink
         to={routes.home}
         exact
-        className={styles.link}
-        activeClassName={styles.activeLink}
+        className={classnames(commonStyles.link, styles.linkHome)}
+        activeClassName={commonStyles.activeLink}
       >
         Home
       </NavLink>
@@ -21,8 +23,8 @@ const Navigation = ({ isAuthorized }) => {
         <NavLink
           to={routes.contacts}
           exact
-          className={styles.link}
-          activeClassName={styles.activeLink}
+          className={commonStyles.link}
+          activeClassName={commonStyles.activeLink}
         >
           Contacts
         </NavLink>

@@ -22,6 +22,7 @@ const registerUser = userCredentials => async dispatch => {
 
     dispatch(actions.registerUserSuccess(response.data));
   } catch (error) {
+    alert('User credentials are invalid');
     dispatch(actions.registerUserError(error.message));
   }
 };
@@ -35,6 +36,7 @@ const loginUser = userCredentials => async dispatch => {
     token.set(response.data.token);
     dispatch(actions.loginSuccess(response.data));
   } catch (error) {
+    alert('User credentials are invalid');
     dispatch(actions.loginError(error.message));
   }
 };

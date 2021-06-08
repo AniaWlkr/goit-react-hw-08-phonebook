@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { operations } from '../../../redux/auth';
 import Button from '../../Button';
+import commonStyles from '../../commonStyles/formComStyles.module.css';
 
 class LoginPage extends Component {
   state = {
@@ -29,26 +30,28 @@ class LoginPage extends Component {
     const { email, password } = this.state;
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form onSubmit={this.handleSubmit} className={commonStyles.form}>
+        <label className={commonStyles.label}>
           Email
           <input
             type="email"
             name="email"
             value={email}
             onChange={this.handleChange}
+            className={commonStyles.input}
           />
         </label>
-        <label>
+        <label className={commonStyles.label}>
           Password
           <input
             type="password"
             name="password"
             value={password}
             onChange={this.handleChange}
+            className={commonStyles.input}
           />
         </label>
-        <Button type="submit" title="Login" />
+        <Button type="submit" title="Login" className={commonStyles.button} />
       </form>
     );
   }
