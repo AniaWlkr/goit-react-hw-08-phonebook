@@ -1,4 +1,4 @@
-const getIsAuthorized = state => Boolean(state.auth.token);
+const getIsAuthenticated = state => Boolean(state.auth.token);
 const getUserName = state => state.auth.user.name;
 
-export default { getIsAuthorized, getUserName };
+export default { getIsAuthenticated, getUserName };

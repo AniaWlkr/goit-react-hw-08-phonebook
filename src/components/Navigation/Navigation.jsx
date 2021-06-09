@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import routes from '../routes';
 import { selectors } from '../../redux/auth';
 
-const Navigation = ({ isAuthorized }) => {
+const Navigation = ({ isAuthenticated }) => {
   return (
     <nav>
       <NavLink
@@ -19,7 +19,7 @@ const Navigation = ({ isAuthorized }) => {
       >
         Home
       </NavLink>
-      {isAuthorized && (
+      {isAuthenticated && (
         <NavLink
           to={routes.contacts}
           exact
@@ -34,11 +34,11 @@ const Navigation = ({ isAuthorized }) => {
 };
 
 Navigation.propTypes = {
-  isAuthorized: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  isAuthorized: selectors.getIsAuthorized(state),
+  isAuthenticated: selectors.getIsAuthenticated(state),
 });
 
 export default connect(mapStateToProps)(Navigation);

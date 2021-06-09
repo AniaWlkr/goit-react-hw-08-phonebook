@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   render() {
-    const { isAuthorized } = this.props;
+    const { isAuthenticated } = this.props;
 
     return (
       <Container>
@@ -30,7 +30,7 @@ class App extends Component {
             <Route
               path={routes.register}
               render={props =>
-                !isAuthorized ? (
+                !isAuthenticated ? (
                   <RegisterPage {...props} />
                 ) : (
                   <Redirect to={routes.contacts} />
@@ -40,7 +40,7 @@ class App extends Component {
             <Route
               path={routes.login}
               render={props =>
-                !isAuthorized ? (
+                !isAuthenticated ? (
                   <LoginPage {...props} />
                 ) : (
                   <Redirect to={routes.contacts} />
@@ -50,7 +50,7 @@ class App extends Component {
             <Route
               path={routes.contacts}
               render={props =>
-                isAuthorized ? (
+                isAuthenticated ? (
                   <ContactsPage {...props} />
                 ) : (
                   <Redirect to={routes.login} />
@@ -66,7 +66,7 @@ class App extends Component {
 
 App.propTypes = {
   getCurrentUser: PropTypes.func,
-  isAuthorized: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapDispatchToProps = {
@@ -74,7 +74,7 @@ const mapDispatchToProps = {
 };
 
 const mapStateToProps = state => ({
-  isAuthorized: selectors.getIsAuthorized(state),
+  isAuthenticated: selectors.getIsAuthenticated(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

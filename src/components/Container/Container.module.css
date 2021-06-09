@@ -1,5 +1,20 @@
+/* @value mobile: 320px;
+@value tablet: 768px;
+@value desktop: 1024px; */
+
 .container {
-  width: 1300px;
-  padding: 0 15px;
+  padding: 0 20px;
   margin: 0 auto;
+
+  @media (min-width: 320px) {
+    width: 320px;
+  }
+
+  @media (min-width: 768px) {
+    width: 768px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 1024;
+  }
 }

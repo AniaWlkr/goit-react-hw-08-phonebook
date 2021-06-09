@@ -7,21 +7,21 @@ import Navigation from '../Navigation';
 import UserMenu from '../UserMenu';
 import AuthNav from '../AuthNav';
 
-const AppBar = ({ isAuthorized }) => {
+const AppBar = ({ isAuthenticated }) => {
   return (
     <header className={styles.header}>
       <Navigation />
-      {isAuthorized ? <UserMenu /> : <AuthNav />}
+      {isAuthenticated ? <UserMenu /> : <AuthNav />}
     </header>
   );
 };
 
 AppBar.propTypes = {
-  isAuthorized: PropTypes.bool,
+  isAuthenticated: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
-  isAuthorized: selectors.getIsAuthorized(state),
+  isAuthenticated: selectors.getIsAuthenticated(state),
 });
 
 export default connect(mapStateToProps, null)(AppBar);
