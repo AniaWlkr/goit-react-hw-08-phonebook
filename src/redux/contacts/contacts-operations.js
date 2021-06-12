@@ -28,11 +28,11 @@ const deleteContact = contactId => dispatch => {
     .catch(error => dispatch(actions.deleteContactError(error.message)));
 };
 
-const changeContact = contactId => dispatch => {
+const changeContact = (contactId, updatedContact) => dispatch => {
   dispatch(actions.changeContactRequest());
 
   return axios
-    .patch(`/contacts/${contactId}`)
+    .patch(`/contacts/${contactId}`, updatedContact)
     .then(({ data }) => dispatch(actions.changeContactSuccess(data)))
     .catch(error => dispatch(actions.changeContactError(error.message)));
 };

@@ -16,6 +16,7 @@ const {
   changeContactSuccess,
   changeContactError,
   changeFilter,
+  changeContactId,
 } = actions;
 
 const items = createReducer([], {
@@ -32,6 +33,10 @@ const items = createReducer([], {
 
 const filter = createReducer('', {
   [changeFilter]: (_, { payload }) => payload,
+});
+
+const contactId = createReducer('', {
+  [changeContactId]: (_, { payload }) => payload,
 });
 
 const loading = createReducer(false, {
@@ -55,5 +60,6 @@ const loading = createReducer(false, {
 export default combineReducers({
   items,
   filter,
+  contactId,
   loading,
 });

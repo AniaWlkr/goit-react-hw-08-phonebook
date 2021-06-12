@@ -24,7 +24,6 @@ class ContactForm extends Component {
     event.preventDefault();
 
     const newContact = {
-      // id: v4(),
       name: this.state.name,
       number: this.state.number,
     };
