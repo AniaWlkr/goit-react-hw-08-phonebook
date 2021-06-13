@@ -23,9 +23,6 @@
   align-items: center;
   justify-content: center;
 
-  width: 30px;
-  height: 30px;
-
   border-style: none;
   background-color: transparent;
   cursor: pointer;
@@ -33,7 +30,21 @@
 }
 
 .icon {
-  width: 30px;
-  height: 30px;
+  width: 15px;
+  height: 15px;
   fill: rgba(34, 10, 172, 0.826);
+}
+
+@media screen and (min-width: 768px) {
+  .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
 }

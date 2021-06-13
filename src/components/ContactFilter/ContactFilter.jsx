@@ -6,7 +6,7 @@ import { changeFilter, selectors } from '../../redux/contacts';
 
 const ContactFilter = ({ value, handleChange }) => {
   return (
-    <div>
+    <div className={styles.container}>
       <label className={styles.label}>
         <span role="img" aria-label="loupe icon" className={styles.icon}>
           🔎

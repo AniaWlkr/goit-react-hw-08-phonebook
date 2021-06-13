@@ -32,20 +32,22 @@ const ContactList = ({ contacts, handleDelete, isLoadingContacts }) => {
           {contacts.map(contact => (
             <li key={contact.id} className={styles.item}>
               {contact.name}: {contact.number}
-              <Button
-                type="button"
-                cbOnClick={onChangeBtnClick}
-                cbArgs={[contact.id]}
-                className={styles.button}
-                title="Change &nbsp; 📝"
-              />
-              <Button
-                type="button"
-                cbOnClick={handleDelete}
-                cbArgs={[contact.id]}
-                className={styles.button}
-                title="Delete &nbsp; ❌"
-              />
+              <div>
+                <Button
+                  type="button"
+                  cbOnClick={onChangeBtnClick}
+                  cbArgs={[contact.id]}
+                  className={styles.button}
+                  title="Change &nbsp; 📝"
+                />
+                <Button
+                  type="button"
+                  cbOnClick={handleDelete}
+                  cbArgs={[contact.id]}
+                  className={styles.button}
+                  title="Delete &nbsp; ❌"
+                />
+              </div>
             </li>
           ))}
         </ul>
@@ -86,7 +88,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleDelete: contactId => dispatch(operations.deleteContact(contactId)),
-  // handleChange: contactId => dispatch(operations.changeContact(contactId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);

@@ -1,6 +1,6 @@
 .link {
   text-decoration: none;
-  font-size: 19px;
+  font-size: 14px;
   font-weight: bold;
 }
 
@@ -11,4 +11,15 @@
 .link:hover,
 .link:focus {
   text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+  .link {
+    font-size: 18px;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .link {
+    font-size: 20px;
+  }
 }
