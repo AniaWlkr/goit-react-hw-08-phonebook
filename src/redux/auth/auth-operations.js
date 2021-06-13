@@ -60,15 +60,16 @@ const getCurrentUser = () => (dispatch, getState) => {
   if (!persistedToken) {
     return;
   }
-
   token.set(persistedToken);
-
   dispatch(actions.getCurrentUserRequest());
 
   return axios
     .get('/users/current')
     .then(({ data }) => dispatch(actions.getCurrentUserSuccess(data)))
-    .catch(error => dispatch(actions.getCurrentUserError(error.message)));
+    .catch(error => {
+      token.unset();
+      dispatch(actions.getCurrentUserError(error.message));
+    });
 };
 
 export default { registerUser, loginUser, logoutUser, getCurrentUser };
